@@ -125,6 +125,9 @@ class Session():
 def root():
 	return send_from_directory(WEBAPP_DIR, WEBAPP_HTML)
 
+@app.route('/_health')
+def healthcheck():
+	return 'healthy'
 
 @app.route('/api/scans', methods=['POST'])
 def api_scan():
