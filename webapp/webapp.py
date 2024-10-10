@@ -40,7 +40,11 @@ DOMAIN_BLOCKLIST = []
 
 DICTIONARY = ('auth', 'account', 'confirm', 'connect', 'enroll', 'http', 'https', 'info', 'login', 'mail', 'my',
 	'online', 'payment', 'portal', 'recovery', 'register', 'ssl', 'safe', 'secure', 'signin', 'signup', 'support',
-	'update', 'user', 'verify', 'verification', 'web', 'www')
+	'update', 'user', 'verify', 'verification', 'web', 'www', 'airdrop', 'bounty', 'ico', 'token', 'air', 'drop', 
+	'alert', 'bridge', 'card', 'chrome', 'contact', 'crypto', 'crypto', 'dao', 'defi', 'extension', 'guard', 'key',
+	'help', 'helpdesk', 'homepage', 'hub', 'import', 'inbox', 'ipo', 'kyc', 'launch', 'launchpad', 'portfolio',
+	'private', 'receive', 'rewards', 'recover', 'redeem', 'return', 'seed', 'sign', 'signature', 'swap', 'stake',
+	'staking', 'wallet', 'whitelist', 'eligible', 'eligibility', 'web3')
 TLD_DICTIONARY = ('com', 'net', 'org', 'info', 'cn', 'co', 'eu', 'de', 'uk', 'pw', 'ga', 'gq', 'tk', 'ml', 'cf',
 	'app', 'biz', 'top', 'xyz', 'online', 'site', 'live')
 
