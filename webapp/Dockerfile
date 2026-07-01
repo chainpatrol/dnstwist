@@ -11,7 +11,13 @@ RUN        apt-get update && \
 COPY       ./webapp/webapp.py /opt/dnstwist/
 COPY       ./webapp/webapp.html /opt/dnstwist/
 COPY       ./webapp/dnstwist.py /opt/dnstwist/
+COPY       ./webapp/entrypoint.sh /opt/dnstwist/
+
+ENV        HOST=::
+ENV        PORT=8000
 
 EXPOSE     8000
 
-CMD        ["gunicorn3", "webapp:app", "--bind", "0.0.0.0:8000", "--workers", "1", "--threads", "3", "--log-level", "debug"]
+RUN        chmod +x /opt/dnstwist/entrypoint.sh
+
+ENTRYPOINT ["/opt/dnstwist/entrypoint.sh"]
