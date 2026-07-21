@@ -40,7 +40,7 @@ def bind_address(host=None, port=None):
 THREADS = int(os.environ.get('THREADS', dnstwist.THREAD_COUNT_DEFAULT))
 NAMESERVERS = os.environ.get('NAMESERVERS') or os.environ.get('NAMESERVER')
 SESSION_TTL = int(os.environ.get('SESSION_TTL', 3600))
-SESSION_MAX = int(os.environ.get('SESSION_MAX', 10)) # max concurrent sessions
+SESSION_MAX = int(os.environ.get('SESSION_MAX', 15)) # max concurrent sessions
 DOMAIN_MAXLEN = int(os.environ.get('DOMAIN_MAXLEN', 15))
 WEBAPP_HTML = os.environ.get('WEBAPP_HTML', 'webapp.html')
 WEBAPP_DIR = os.environ.get('WEBAPP_DIR', os.path.dirname(os.path.abspath(__file__)))
@@ -145,7 +145,7 @@ def healthcheck():
 @app.route('/api/scans', methods=['POST'])
 def api_scan():
 	if sum([1 for s in sessions if not s.jobs.empty()]) >= SESSION_MAX:
-		return jsonify({'message': 'Too many scan sessions - please retry in a minute'}), 500
+		return jsonify({'message': 'Too many scan sessions - please retry in a minute'}), 429
 	j = request.get_json(force=True)
 	if 'url' not in j:
 		return jsonify({'message': 'Bad request'}), 400
@@ -160,7 +160,7 @@ def api_scan():
 			return jsonify({'message': 'Not allowed'}), 400
 	try:
 		session = Session(j.get('url'), nameservers=NAMESERVERS)
-	except Exception as err:
+	except Exception:
 		return jsonify({'message': 'Invalid domain name'}), 400
 	else:
 		session.scan()
